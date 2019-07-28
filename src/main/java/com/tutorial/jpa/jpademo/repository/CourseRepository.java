@@ -41,8 +41,19 @@ public class CourseRepository {
 	//@transactional이 붙어서 이 메소드는 하나의 transaction으로 취급된다. 따라서 setName하면 update까지 된다.
 	//트랜잭션안에서 변화가 생기면 entitymanager가 다 추적해서 관리한다. 그래서 update(merge)까지 시켜버림.
 	public void playWithEntityManager() {
-		Course course = new Course("new course for testing");
-		em.persist(course);
-		course.setName("what would happen if i change this course name");
+		Course course1 = new Course("new course for testing");
+		em.persist(course1);
+		Course course2 = new Course("new course2 for testing");
+		em.persist(course2);
+		em.flush(); //사실 요게 다 들어가있다. db에 반영시켜라는거
+		
+		//em.clear(); //course1, course2 모두 detach시키는 효과
+		em.detach(course2);//detach된 entity는 entyty manager가 더이상 추적하지 않는다. //coure1만 업데이트된다.
+
+		course1.setName("what would happen if i change this course1 name");
+		em.flush(); //사실 요게 다 들어가있다. db에 반영시켜라는거
+		
+		course2.setName("what would happen if i change this course2 name");
+		em.flush(); //사실 요게 다 들어가있다. db에 반영시켜라는거
 	}
 }
