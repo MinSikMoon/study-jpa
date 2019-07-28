@@ -19,22 +19,26 @@ import com.tutorial.jpa.jpademo.entity.Course;
 @SpringBootTest(classes=JpademoApplication.class)
 public class CourseRepositoryTest {
 	
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(CourseRepositoryTest.class);
 	
 	@Autowired
 	CourseRepository repository;
 	
-	
-	
 	@Test
 	@Order(1)
+	public void playWithEntityManager() {
+		repository.playWithEntityManager();
+	}
+	
+	@Test
+	@Order(2)
 	public void id로_해당하는_course를_1개찾는다() {
 		Course course = repository.findById(10001L);
 		assertEquals("mathematics", course.getName());
 	}
 	
 	@Test
-	@Order(2)
+	@Order(3)
 	@DirtiesContext //이전의 상태로 리셋해놓는다.
 	public void id에_해당하는_course를_삭제한다() {
 		repository.deleteById(10001L);
@@ -42,7 +46,7 @@ public class CourseRepositoryTest {
 	}
 	
 	@Test
-	@Order(3)
+	@Order(4)
 	@DirtiesContext //이전의 상태로 리셋해놓는다.
 	public void id에_해당하는_course를_update한다() {
 		Course course = repository.findById(10001L);
@@ -51,5 +55,7 @@ public class CourseRepositoryTest {
 		course = repository.findById(10001L);
 		assertEquals("forTest", course.getName());
 	}
+	
+	
 
 }
