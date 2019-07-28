@@ -48,12 +48,10 @@ public class CourseRepository {
 		em.flush(); //사실 요게 다 들어가있다. db에 반영시켜라는거
 		
 		//em.clear(); //course1, course2 모두 detach시키는 효과
-		em.detach(course2);//detach된 entity는 entyty manager가 더이상 추적하지 않는다. //coure1만 업데이트된다.
-
+		//em.detach(course2);//detach된 entity는 entyty manager가 더이상 추적하지 않는다. //coure1만 업데이트된다.
 		course1.setName("what would happen if i change this course1 name");
-		em.flush(); //사실 요게 다 들어가있다. db에 반영시켜라는거
-		
 		course2.setName("what would happen if i change this course2 name");
+		em.refresh(course1);
 		em.flush(); //사실 요게 다 들어가있다. db에 반영시켜라는거
 	}
 }
