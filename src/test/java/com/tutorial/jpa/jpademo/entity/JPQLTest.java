@@ -27,7 +27,8 @@ public class JPQLTest {
 	
 	@Test
 	public void jpql_select() {
-		Query query = em.createQuery("Select c from Course c");
+		//Query query = em.createQuery("Select c from Course c");
+		Query query = em.createNamedQuery("get_all_courses");
 		List resultList = query.getResultList();
 		logger.info("select c from Course c -> {}", resultList);
 	}

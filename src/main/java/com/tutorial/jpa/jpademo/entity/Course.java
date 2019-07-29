@@ -6,12 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-@Entity
 //@Table(name="CourseDetails") //테이블 이름을 이렇게 매핑 시킬 수 있다. 
+@Entity
+@NamedQuery(name = "get_all_courses", query = "select c from Course c") //쿼리를 알리안스로 쓸수 있다.
 public class Course {
 	
 	@Id
