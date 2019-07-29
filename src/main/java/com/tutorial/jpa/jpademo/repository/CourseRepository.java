@@ -52,6 +52,8 @@ public class CourseRepository {
 		course1.setName("what would happen if i change this course1 name");
 		course2.setName("what would happen if i change this course2 name");
 		em.refresh(course1);
+		
+		course2.setName("i changed course2 name again"); //여기서 update가 한번 되므로 updatedtime이 달라질것이다.
 		em.flush(); //사실 요게 다 들어가있다. db에 반영시켜라는거
 	}
 }

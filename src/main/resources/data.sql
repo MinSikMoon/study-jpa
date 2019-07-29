@@ -1,2 +1,2 @@
-insert into Course (id, name) values ('10001', 'mathematics');
-insert into Course (id, name) values ('10002', 'korean');
+insert into Course (id, name, created_date, last_updated_date) values ('10001', 'mathematics', sysdate(), sysdate());
+insert into Course (id, name, created_date, last_updated_date) values ('10002', 'korean', sysdate(), sysdate());
