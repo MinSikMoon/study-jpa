@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -51,6 +52,17 @@ public class CourseRepositoryTest {
 	public void id에_해당하는_course를_update한다() {
 		Course course = repository.findById(10001L);
 		course.setName("forTest");
+		repository.save(course);
+		course = repository.findById(10001L);
+		assertEquals("forTest", course.getName());
+	}
+	
+	@Test(expected=DataIntegrityViolationException.class)
+	@Order(5)
+	@DirtiesContext //이전의 상태로 리셋해놓는다.
+	public void 컬럼이_not_nullable이라면_익셉션일날것() {
+		Course course = repository.findById(10001L);
+		course.setName(null);
 		repository.save(course);
 		course = repository.findById(10001L);
 		assertEquals("forTest", course.getName());
