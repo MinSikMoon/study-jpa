@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.tutorial.jpa.jpademo.repository.CourseRepository;
+import com.tutorial.jpa.jpademo.repository.StudentRepository;
 
 @SpringBootApplication
 public class JpademoApplication implements CommandLineRunner {
@@ -15,7 +16,8 @@ public class JpademoApplication implements CommandLineRunner {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private CourseRepository repository;
+	private CourseRepository courseRepository;
+	private StudentRepository studentRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(JpademoApplication.class, args);
@@ -23,6 +25,7 @@ public class JpademoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		repository.playWithEntityManager();
+		courseRepository.playWithEntityManager();
+		//studentRepository.playWithEntityManager();
 	}
 }

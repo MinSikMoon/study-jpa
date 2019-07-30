@@ -2,6 +2,7 @@ package com.tutorial.jpa.jpademo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -17,7 +18,7 @@ public class Student {
 	private String name;
 	
 	//passport와 1대1
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	private Passport passport;
 	
 	protected Student() {}
@@ -36,6 +37,14 @@ public class Student {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public Passport getPassport() {
+		return passport;
+	}
+
+	public void setPassport(Passport passport) {
+		this.passport = passport;
 	}
 
 	@Override
